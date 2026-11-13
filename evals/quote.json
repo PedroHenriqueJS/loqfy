@@ -1,0 +1,62 @@
+{
+  "reference_date": "2026-11-11",
+  "notes": "Reference day is a Wednesday. Stock held by BookingsSeeder on that day: roller 10-20/11 (1 of 1), Betoneira 400L 14-15/11 (4 of 4), Gerador 12 kVA 16-18/11 (1 of 1), scaffolding 12-30/11 (50 of 60), Martelete 11-14/11 (2 of 4). An item with several names accepts any of them. total is checked only when present.",
+  "cases": [
+    {"id": "simple-1", "category": "simple", "text": "Preciso de uma furadeira de impacto amanhã, retiro na loja",
+     "expect": {"items": [{"equipment": ["Furadeira de impacto"], "quantity": 1}], "start_date": "2026-11-12", "end_date": "2026-11-12", "zone": null, "needs_review": false, "total": 30}},
+    {"id": "simple-2", "category": "simple", "text": "Bom dia, quero alugar 2 escadas extensíveis de 16 a 18/11. Entrega no Kobrasol. Aqui é a Renata",
+     "expect": {"items": [{"equipment": ["Escada extensível 7m"], "quantity": 2}], "start_date": "2026-11-16", "end_date": "2026-11-18", "zone": 1, "needs_review": false, "total": 220}},
+    {"id": "simple-3", "category": "simple", "text": "Quero uma placa vibratória por 3 dias a partir de segunda, obra na Trindade",
+     "expect": {"items": [{"equipment": ["Placa vibratória"], "quantity": 1}], "start_date": "2026-11-16", "end_date": "2026-11-18", "zone": 2, "needs_review": false, "total": 390}},
+
+    {"id": "multi-1", "category": "multiple items", "text": "Preciso de 1 serra mármore, 1 esmerilhadeira e 4 carrinhos de mão de quinta a sábado. Entrega em Coqueiros.",
+     "expect": {"items": [{"equipment": ["Serra mármore"], "quantity": 1}, {"equipment": ["Esmerilhadeira 7 polegadas"], "quantity": 1}, {"equipment": ["Carrinho de mão"], "quantity": 4}], "start_date": "2026-11-12", "end_date": "2026-11-14", "zone": 1, "needs_review": false, "total": 394}},
+    {"id": "multi-2", "category": "multiple items", "text": "oi, 30 escoras metálicas e 1 vibrador de concreto do dia 20 ao dia 27/11, entrega no centro de Palhoça",
+     "expect": {"items": [{"equipment": ["Escora metálica"], "quantity": 30}, {"equipment": ["Vibrador de concreto"], "quantity": 1}], "start_date": "2026-11-20", "end_date": "2026-11-27", "zone": 3, "needs_review": false, "total": 988}},
+    {"id": "multi-3", "category": "multiple items", "text": "Gerador 5 kva e compressor de ar pra amanhã e sexta, retiro",
+     "expect": {"items": [{"equipment": ["Gerador 5 kVA"], "quantity": 1}, {"equipment": ["Compressor de ar 10 pés"], "quantity": 1}], "start_date": "2026-11-12", "end_date": "2026-11-13", "zone": null, "needs_review": false, "total": 420}},
+
+    {"id": "dates-1", "category": "relative dates", "text": "preciso de um martelo demolidor 30kg no fim de semana, entrega no Estreito",
+     "expect": {"items": [{"equipment": ["Martelo demolidor 30kg"], "quantity": 1}], "start_date": "2026-11-14", "end_date": "2026-11-15", "zone": 1, "needs_review": false, "total": 340}},
+    {"id": "dates-2", "category": "relative dates", "text": "Tem aspirador industrial pra hoje? Passo aí pegar",
+     "expect": {"items": [{"equipment": ["Aspirador industrial"], "quantity": 1}], "start_date": "2026-11-11", "end_date": "2026-11-11", "zone": null, "needs_review": false, "total": 60}},
+    {"id": "dates-3", "category": "relative dates", "text": "Quero a politriz de piso da próxima segunda até quarta. Entrega no Itacorubi",
+     "expect": {"items": [{"equipment": ["Politriz de piso"], "quantity": 1}], "start_date": "2026-11-16", "end_date": "2026-11-18", "zone": 2, "needs_review": false, "total": 330}},
+
+    {"id": "slang-1", "category": "synonyms and slang", "text": "tem sapo pra alugar amanhã? obra em Barreiros",
+     "expect": {"items": [{"equipment": ["Compactador de solo tipo sapo"], "quantity": 1}], "start_date": "2026-11-12", "end_date": "2026-11-12", "zone": 1, "needs_review": false, "total": 160}},
+    {"id": "slang-2", "category": "synonyms and slang", "text": "preciso de um lava jato e de uma makita sábado, retiro na loja",
+     "expect": {"items": [{"equipment": ["Lavadora de alta pressão"], "quantity": 1}, {"equipment": ["Serra mármore"], "quantity": 1}], "start_date": "2026-11-14", "end_date": "2026-11-14", "zone": null, "needs_review": false, "total": 105}},
+    {"id": "slang-3", "category": "synonyms and slang", "text": "quero alugar uma carriola e um helicóptero pra alisar piso, dias 17 e 18. Entrega em Campinas",
+     "expect": {"items": [{"equipment": ["Carrinho de mão"], "quantity": 1}, {"equipment": ["Alisadora de concreto"], "quantity": 1}], "start_date": "2026-11-17", "end_date": "2026-11-18", "zone": 1, "needs_review": false, "total": 384}},
+
+    {"id": "typo-1", "category": "typos", "text": "presiso de uma betonera 400 litros amanha, entrega no pantanal",
+     "expect": {"items": [{"equipment": ["Betoneira 400L"], "quantity": 1}], "start_date": "2026-11-12", "end_date": "2026-11-12", "zone": 2, "needs_review": false, "total": 150}},
+    {"id": "typo-2", "category": "typos", "text": "bom dia qero 10 andaimes e 1 furadera pra segunda e terça, entrega em sao jose",
+     "expect": {"items": [{"equipment": ["Andaime tubular 1,0 x 1,5m"], "quantity": 10}, {"equipment": ["Furadeira de impacto"], "quantity": 1}], "start_date": "2026-11-16", "end_date": "2026-11-17", "zone": 1, "needs_review": false, "total": 260}},
+
+    {"id": "unavailable-1", "category": "unavailable", "text": "Preciso do rolo compactador amanhã, obra em Palhoça",
+     "expect": {"items": [{"equipment": ["Placa vibratória", "Compactador de solo tipo sapo", "Rolo compactador 1,5t"], "quantity": 1}], "start_date": "2026-11-12", "end_date": "2026-11-12", "zone": 3, "needs_review": true}},
+    {"id": "unavailable-2", "category": "unavailable", "text": "quero uma betoneira 400L pro fim de semana, retiro na loja",
+     "expect": {"items": [{"equipment": ["Betoneira 150L", "Betoneira 400L"], "quantity": 1}], "start_date": "2026-11-14", "end_date": "2026-11-15", "zone": null, "needs_review": true}},
+    {"id": "unavailable-3", "category": "unavailable", "text": "preciso de 20 andaimes de 16 a 20/11, entrega nos Ingleses",
+     "expect": {"items": [{"equipment": ["Andaime tubular 1,0 x 1,5m"], "quantity": 20}], "start_date": "2026-11-16", "end_date": "2026-11-20", "zone": 4, "needs_review": true}},
+
+    {"id": "ambiguous-1", "category": "ambiguous or incomplete", "text": "preciso de um gerador amanhã",
+     "expect": {"items": [{"equipment": ["Gerador 5 kVA", "Gerador 12 kVA"], "quantity": 1}], "start_date": "2026-11-12", "end_date": "2026-11-12", "zone": null, "needs_review": true}},
+    {"id": "ambiguous-2", "category": "ambiguous or incomplete", "text": "Oi, quero alugar uma serra. Entrega no Campeche",
+     "expect": {"items": [{"equipment": ["Serra mármore", "Serra circular", "Cortadora de piso", "Policorte"], "quantity": 1}], "start_date": null, "end_date": null, "zone": 4, "needs_review": true}},
+    {"id": "ambiguous-3", "category": "ambiguous or incomplete", "text": "quanto fica uma betoneira pra semana que vem?",
+     "expect": {"items": [{"equipment": ["Betoneira 400L", "Betoneira 150L"], "quantity": 1}], "start_date": null, "end_date": null, "zone": null, "needs_review": true}},
+
+    {"id": "catalog-1", "category": "not in catalog", "text": "vocês tem guindaste e mini escavadeira pra alugar dia 20?",
+     "expect": {"items": [], "start_date": "2026-11-20", "end_date": "2026-11-20", "zone": null, "needs_review": true}},
+    {"id": "catalog-2", "category": "not in catalog", "text": "preciso de uma betoneira 150L e de uma retroescavadeira de 18 a 19/11, retiro",
+     "expect": {"items": [{"equipment": ["Betoneira 150L"], "quantity": 1}], "start_date": "2026-11-18", "end_date": "2026-11-19", "zone": null, "needs_review": true}},
+
+    {"id": "other-1", "category": "other", "text": "2 furadeiras pra sexta, entrega em Blumenau",
+     "expect": {"items": [{"equipment": ["Furadeira de impacto"], "quantity": 2}], "start_date": "2026-11-13", "end_date": "2026-11-13", "zone": null, "needs_review": true}},
+    {"id": "other-2", "category": "other", "text": "bom dia, vocês abrem sábado?",
+     "expect": {"items": [], "start_date": null, "end_date": null, "zone": null, "needs_review": true}}
+  ]
+}

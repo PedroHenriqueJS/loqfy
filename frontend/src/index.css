@@ -1,0 +1,122 @@
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --lq-bg: #f3f5fa;
+  --lq-paper: #ffffff;
+  --lq-subtle: #f1f4fa;
+  --lq-hover: #f5f7fc;
+  --lq-border: #e2e7f1;
+  --lq-ink: #101a33;
+  --lq-muted: #5a6682;
+  --lq-faint: #8a94ab;
+  --lq-blue: #2f6bea;
+  --lq-blue-soft: #e8effd;
+  --lq-orange: #f28c1e;
+  --lq-violet: #6b4fd8;
+  --lq-violet-hover: #5a3fc4;
+  --lq-on-violet: #ffffff;
+  --lq-shadow: 0 1px 2px rgb(16 26 51 / 0.04), 0 4px 16px rgb(16 26 51 / 0.04);
+
+  --lq-side: #0f1a33;
+  --lq-side-ink: #a9b5cf;
+  --lq-side-ink-strong: #ffffff;
+  --lq-side-hover: rgb(255 255 255 / 0.06);
+  --lq-side-active: rgb(255 255 255 / 0.11);
+  --lq-side-border: rgb(255 255 255 / 0.08);
+  --lq-side-violet: #a995ff;
+
+  --lq-series-1: #2f6bea;
+  --lq-series-2: #d9730d;
+  --lq-grid: #e9edf4;
+
+  --pill-neutral-bg: #edf0f6; --pill-neutral-fg: #4a5672;
+  --pill-muted-bg: #f1f3f8;   --pill-muted-fg: #7a859d;
+  --pill-green-bg: #e2f3e9;   --pill-green-fg: #1c6b3d;
+  --pill-amber-bg: #fdf0d5;   --pill-amber-fg: #8a5200;
+  --pill-blue-bg: #e4edfd;    --pill-blue-fg: #1f4fb5;
+  --pill-red-bg: #fde7e5;     --pill-red-fg: #a3271f;
+  --pill-violet-bg: #efeafc;  --pill-violet-fg: #5b3fb0;
+
+  --lq-warn-bg: #fff8e8;
+  --lq-warn-border: #f2dca8;
+  --lq-ai-bg: #f6f3fe;
+  --lq-ai-border: #ddd3f8;
+}
+
+.dark {
+  --lq-bg: #0a1120;
+  --lq-paper: #131c30;
+  --lq-subtle: #1a2540;
+  --lq-hover: #18223a;
+  --lq-border: #243049;
+  --lq-ink: #e8ecf5;
+  --lq-muted: #9aa6bf;
+  --lq-faint: #6f7b95;
+  --lq-blue: #6f9af7;
+  --lq-blue-soft: #1b2b52;
+  --lq-orange: #f5a13a;
+  --lq-violet: #b5a2fb;
+  --lq-violet-hover: #c6b7fc;
+  --lq-on-violet: #150f33;
+  --lq-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+
+  --lq-side: #0b1323;
+  --lq-side-border: rgb(255 255 255 / 0.06);
+
+  --lq-series-1: #5b8df6;
+  --lq-series-2: #d9770f;
+  --lq-grid: #222d45;
+
+  --pill-neutral-bg: #222d47; --pill-neutral-fg: #b4bfd6;
+  --pill-muted-bg: #1b2439;   --pill-muted-fg: #7f8ba5;
+  --pill-green-bg: #143524;   --pill-green-fg: #7fd6a2;
+  --pill-amber-bg: #3a2c0c;   --pill-amber-fg: #f2c264;
+  --pill-blue-bg: #1b2b52;    --pill-blue-fg: #9dbbfb;
+  --pill-red-bg: #3d1a19;     --pill-red-fg: #f4a29b;
+  --pill-violet-bg: #2a2150;  --pill-violet-fg: #c3b1f7;
+
+  --lq-warn-bg: #2a220f;
+  --lq-warn-border: #4d3d15;
+  --lq-ai-bg: #1c1838;
+  --lq-ai-border: #3a2f6b;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.enter {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter {
+    transition: opacity 150ms ease;
+
+    @starting-style {
+      transform: none;
+    }
+  }
+}
