@@ -1,19 +1,19 @@
 {
     "suite": "quote",
     "model": "qwen/qwen3.8-27b",
+    "ran_at": "2026-11-15T20:36:52-03:00",
     "reference_date": "2026-11-11",
-    "ran_at": "2026-11-11T10:06:15-03:00",
     "summary": {
-        "cases_fully_correct": "22/24 (92%)",
+        "cases_fully_correct": "24/24 (100%)",
         "valid_output": "24/24 (100%)",
         "items_correct": "24/24 (100%)",
-        "dates_correct": "23/24 (96%)",
+        "dates_correct": "24/24 (100%)",
         "delivery_zone_correct": "24/24 (100%)",
-        "review_flag_correct": "23/24 (96%)",
+        "review_flag_correct": "24/24 (100%)",
         "total_correct_when_checked": "14/14 (100%)",
         "invented_prices": 0,
-        "average_latency_ms": 2656,
-        "average_tokens": 2941
+        "average_latency_ms": 2484,
+        "average_tokens": 3108
     },
     "cases": [
         {
@@ -29,8 +29,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2144,
-            "tokens": 2781,
+            "latency_ms": 2145,
+            "tokens": 2927,
             "actual": {
                 "items": [
                     {
@@ -61,8 +61,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 1940,
-            "tokens": 2902,
+            "latency_ms": 2176,
+            "tokens": 3058,
             "actual": {
                 "items": [
                     {
@@ -93,8 +93,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2234,
-            "tokens": 2866,
+            "latency_ms": 3062,
+            "tokens": 3024,
             "actual": {
                 "items": [
                     {
@@ -125,8 +125,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 4237,
-            "tokens": 3276,
+            "latency_ms": 3262,
+            "tokens": 3459,
             "actual": {
                 "items": [
                     {
@@ -165,8 +165,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 3021,
-            "tokens": 3111,
+            "latency_ms": 2460,
+            "tokens": 3289,
             "actual": {
                 "items": [
                     {
@@ -201,8 +201,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2150,
-            "tokens": 2991,
+            "latency_ms": 2878,
+            "tokens": 3152,
             "actual": {
                 "items": [
                     {
@@ -237,8 +237,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2144,
-            "tokens": 2885,
+            "latency_ms": 2472,
+            "tokens": 3045,
             "actual": {
                 "items": [
                     {
@@ -269,8 +269,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2317,
-            "tokens": 2768,
+            "latency_ms": 2135,
+            "tokens": 2926,
             "actual": {
                 "items": [
                     {
@@ -301,8 +301,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2356,
-            "tokens": 2858,
+            "latency_ms": 2056,
+            "tokens": 3005,
             "actual": {
                 "items": [
                     {
@@ -333,8 +333,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2313,
-            "tokens": 2885,
+            "latency_ms": 2386,
+            "tokens": 3060,
             "actual": {
                 "items": [
                     {
@@ -361,14 +361,12 @@
                 "items": true,
                 "dates": true,
                 "delivery": true,
-                "review_flag": false,
+                "review_flag": true,
                 "total": true
             },
-            "failures": [
-                "review flag: got true"
-            ],
-            "latency_ms": 3779,
-            "tokens": 3023,
+            "failures": [],
+            "latency_ms": 2217,
+            "tokens": 3139,
             "actual": {
                 "items": [
                     {
@@ -383,18 +381,12 @@
                 "start_date": "2026-11-14",
                 "end_date": "2026-11-14",
                 "zone": null,
-                "needs_review": true,
+                "needs_review": false,
                 "total": 105,
-                "issues": [
-                    {
-                        "type": "ambiguous",
-                        "message": "O termo 'makita' retornou a 'Serra mármore', que pode não ser o equipamento desejado. Confirme com o cliente.",
-                        "source": "ai"
-                    }
-                ]
+                "issues": []
             },
             "invented_price": false,
-            "passed": false
+            "passed": true
         },
         {
             "id": "slang-3",
@@ -409,8 +401,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 3201,
-            "tokens": 3076,
+            "latency_ms": 2370,
+            "tokens": 3254,
             "actual": {
                 "items": [
                     {
@@ -445,8 +437,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2023,
-            "tokens": 2881,
+            "latency_ms": 2639,
+            "tokens": 3039,
             "actual": {
                 "items": [
                     {
@@ -477,8 +469,8 @@
                 "total": true
             },
             "failures": [],
-            "latency_ms": 2936,
-            "tokens": 3049,
+            "latency_ms": 2837,
+            "tokens": 3217,
             "actual": {
                 "items": [
                     {
@@ -513,12 +505,12 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 2522,
-            "tokens": 3024,
+            "latency_ms": 2597,
+            "tokens": 3210,
             "actual": {
                 "items": [
                     {
-                        "equipment": "Rolo compactador 1,5t",
+                        "equipment": "Compactador de solo tipo sapo",
                         "quantity": 1
                     }
                 ],
@@ -526,16 +518,16 @@
                 "end_date": "2026-11-12",
                 "zone": 3,
                 "needs_review": true,
-                "total": 550,
+                "total": 190,
                 "issues": [
                     {
                         "type": "unavailable",
-                        "message": "O Rolo compactador 1,5t está indisponível. As alternativas no catálogo (Compactador de solo tipo sapo e Placa vibratória) têm finalidades diferentes e não substituem diretamente um rolo compactador para bases e asfalto.",
+                        "message": "O Rolo compactador 1,5t está indisponível. Substituído pelo Compactador de solo tipo sapo, que é uma alternativa disponível, mas com uso diferente (valas estreitas e solo argiloso).",
                         "source": "ai"
                     },
                     {
-                        "type": "unavailable",
-                        "message": "Rolo compactador 1,5t: 0 disponível(is) no período, pedido de 1.",
+                        "type": "substitution",
+                        "message": "Rolo compactador 1,5t indisponível, substituído por Compactador de solo tipo sapo.",
                         "source": "system"
                     }
                 ]
@@ -556,8 +548,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 2208,
-            "tokens": 3028,
+            "latency_ms": 2818,
+            "tokens": 3233,
             "actual": {
                 "items": [
                     {
@@ -599,8 +591,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 4957,
-            "tokens": 3101,
+            "latency_ms": 2976,
+            "tokens": 3300,
             "actual": {
                 "items": [
                     {
@@ -642,8 +634,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 2074,
-            "tokens": 2878,
+            "latency_ms": 2554,
+            "tokens": 3044,
             "actual": {
                 "items": [
                     {
@@ -659,7 +651,7 @@
                 "issues": [
                     {
                         "type": "ambiguous",
-                        "message": "Cliente pediu 'gerador' sem especificar potência. Opções: Gerador 5 kVA e Gerador 12 kVA. Optou-se pelo primeiro (Gerador 5 kVA).",
+                        "message": "O termo 'gerador' pode se referir a Gerador 5 kVA ou Gerador 12 kVA. Foi selecionado o Gerador 5 kVA por ser o primeiro resultado.",
                         "source": "ai"
                     }
                 ]
@@ -680,8 +672,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 2182,
-            "tokens": 2951,
+            "latency_ms": 2040,
+            "tokens": 3120,
             "actual": {
                 "items": [
                     {
@@ -697,7 +689,7 @@
                 "issues": [
                     {
                         "type": "ambiguous",
-                        "message": "O termo 'serra' retornou múltiplas opções: Serra mármore, Serra circular e Cortadora de piso. Foi selecionada a primeira opção (Serra mármore), mas o cliente não especificou qual tipo de serra deseja.",
+                        "message": "O termo 'serra' pode se referir a: Serra mármore, Serra circular ou Cortadora de piso. Qual delas você precisa?",
                         "source": "ai"
                     },
                     {
@@ -717,16 +709,14 @@
             "checks": {
                 "valid_output": true,
                 "items": true,
-                "dates": false,
+                "dates": true,
                 "delivery": true,
                 "review_flag": true,
                 "total": null
             },
-            "failures": [
-                "dates: got 2026-11-16..2026-11-22"
-            ],
-            "latency_ms": 2158,
-            "tokens": 2883,
+            "failures": [],
+            "latency_ms": 2315,
+            "tokens": 3078,
             "actual": {
                 "items": [
                     {
@@ -734,21 +724,26 @@
                         "quantity": 1
                     }
                 ],
-                "start_date": "2026-11-16",
-                "end_date": "2026-11-22",
+                "start_date": null,
+                "end_date": null,
                 "zone": null,
                 "needs_review": true,
-                "total": 535.5,
+                "total": 0,
                 "issues": [
                     {
                         "type": "ambiguous",
-                        "message": "Cliente não especificou o tamanho da betoneira. Opções: Betoneira 400L e Betoneira 150L.",
+                        "message": "Cliente pediu 'betoneira' sem especificar o tamanho. Opções: Betoneira 400L ou Betoneira 150L.",
                         "source": "ai"
+                    },
+                    {
+                        "type": "missing_info",
+                        "message": "Período da locação não definido.",
+                        "source": "system"
                     }
                 ]
             },
             "invented_price": false,
-            "passed": false
+            "passed": true
         },
         {
             "id": "catalog-1",
@@ -763,8 +758,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 2998,
-            "tokens": 2876,
+            "latency_ms": 2280,
+            "tokens": 3017,
             "actual": {
                 "items": [],
                 "start_date": "2026-11-20",
@@ -785,7 +780,7 @@
                     },
                     {
                         "type": "missing_info",
-                        "message": "Nenhum equipamento do catálogo identificado no pedido.",
+                        "message": "Nenhum equipamento do catálogo no orçamento.",
                         "source": "system"
                     }
                 ]
@@ -806,8 +801,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 2760,
-            "tokens": 2980,
+            "latency_ms": 2543,
+            "tokens": 3133,
             "actual": {
                 "items": [
                     {
@@ -844,8 +839,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 3091,
-            "tokens": 2862,
+            "latency_ms": 2277,
+            "tokens": 3038,
             "actual": {
                 "items": [
                     {
@@ -861,7 +856,7 @@
                 "issues": [
                     {
                         "type": "missing_info",
-                        "message": "A locadora não realiza entregas em Blumenau. O cliente precisa retirar na loja ou informar outro local.",
+                        "message": "O cliente pediu entrega em Blumenau, mas a consulta de zona de entrega indicou que não é possível entregar para essa região. É necessário confirmar com o cliente se ele pode retirar na loja ou se há outra forma de logística.",
                         "source": "ai"
                     },
                     {
@@ -887,8 +882,8 @@
                 "total": null
             },
             "failures": [],
-            "latency_ms": 1987,
-            "tokens": 2637,
+            "latency_ms": 2115,
+            "tokens": 2822,
             "actual": {
                 "items": [],
                 "start_date": null,
@@ -904,7 +899,7 @@
                     },
                     {
                         "type": "missing_info",
-                        "message": "Nenhum equipamento do catálogo identificado no pedido.",
+                        "message": "Nenhum equipamento do catálogo no orçamento.",
                         "source": "system"
                     }
                 ]

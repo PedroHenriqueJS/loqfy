@@ -5,14 +5,12 @@ namespace App\Ai;
 use App\Models\FinancialEntry;
 use App\Support\Photo;
 use Carbon\CarbonInterface;
-use Illuminate\Http\Client\RequestException;
 use Prism\Prism\Facades\Prism;
 use Prism\Prism\Schema\BooleanSchema;
 use Prism\Prism\Schema\EnumSchema;
 use Prism\Prism\Schema\ObjectSchema;
 use Prism\Prism\Schema\StringSchema;
 use Prism\Prism\ValueObjects\Media\Image;
-use Throwable;
 
 class ReceiptReader
 {
@@ -24,7 +22,7 @@ class ReceiptReader
             ->using(config('loqfy.ai.provider'), config('loqfy.ai.model'))
             ->usingTemperature(0)
             ->withMaxTokens(500)
-            ->withClientRetry(4, fn (int $attempt, Throwable $e): int => 20_000, fn (Throwable $e): bool => $e instanceof RequestException && $e->response->status() === 429, throw: true)
+            ->withClientRetry(ProviderRetry::ATTEMPTS, ProviderRetry::delayMs(...), ProviderRetry::shouldRetry(...), throw: true)
             ->withSystemPrompt($this->prompt($today))
             ->withPrompt('Comprovante:', [Image::fromBase64(base64_encode(Photo::resizedJpeg($photoPath, 1280)), 'image/jpeg')])
             ->withSchema($this->schema())

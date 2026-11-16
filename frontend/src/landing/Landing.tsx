@@ -235,8 +235,8 @@ export default function Landing() {
         <section className="lp-numbers" id="numeros" data-stagger>
           <p className="lp-eyebrow">Os números do nosso teste</p>
           <div className="lp-numbers__grid">
-            <div data-stagger-item><b><span data-count="22">22</span> de 24</b><p>pedidos lidos sem nenhum erro</p></div>
-            <div data-stagger-item><b><span data-count="2.7" data-decimals="1">2,7</span> s</b><p>em média para montar um orçamento</p></div>
+            <div data-stagger-item><b><span data-count="24">24</span> de 24</b><p>pedidos lidos sem nenhum erro</p></div>
+            <div data-stagger-item><b><span data-count="2.5" data-decimals="1">2,5</span> s</b><p>em média para montar um orçamento</p></div>
             <div data-stagger-item><b><span data-count="0">0</span></b><p>preços inventados</p></div>
           </div>
           <p className="lp-fine">Teste com 24 mensagens de exemplo, incluindo gíria, erro de digitação, item sem estoque e pedido incompleto.</p>

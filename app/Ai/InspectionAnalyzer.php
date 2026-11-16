@@ -3,7 +3,6 @@
 namespace App\Ai;
 
 use App\Support\Photo;
-use Illuminate\Http\Client\RequestException;
 use Prism\Prism\Facades\Prism;
 use Prism\Prism\Schema\ArraySchema;
 use Prism\Prism\Schema\BooleanSchema;
@@ -11,7 +10,6 @@ use Prism\Prism\Schema\EnumSchema;
 use Prism\Prism\Schema\ObjectSchema;
 use Prism\Prism\Schema\StringSchema;
 use Prism\Prism\ValueObjects\Media\Image;
-use Throwable;
 
 class InspectionAnalyzer
 {
@@ -24,7 +22,7 @@ class InspectionAnalyzer
             ->using(config('loqfy.ai.provider'), config('loqfy.ai.model'))
             ->usingTemperature(0)
             ->withMaxTokens(700)
-            ->withClientRetry(4, fn (int $attempt, Throwable $e): int => 20_000, fn (Throwable $e): bool => $e instanceof RequestException && $e->response->status() === 429, throw: true)
+            ->withClientRetry(ProviderRetry::ATTEMPTS, ProviderRetry::delayMs(...), ProviderRetry::shouldRetry(...), throw: true)
             ->withSystemPrompt($this->prompt())
             ->withPrompt("Equipamento: {$equipmentName}. A primeira foto é a de SAÍDA e a segunda é a de DEVOLUÇÃO.", [
                 Image::fromBase64(base64_encode(Photo::resizedJpeg($checkoutPhotoPath, $maxSide)), 'image/jpeg'),

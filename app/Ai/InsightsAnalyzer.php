@@ -2,13 +2,11 @@
 
 namespace App\Ai;
 
-use Illuminate\Http\Client\RequestException;
 use Prism\Prism\Facades\Prism;
 use Prism\Prism\Schema\ArraySchema;
 use Prism\Prism\Schema\EnumSchema;
 use Prism\Prism\Schema\ObjectSchema;
 use Prism\Prism\Schema\StringSchema;
-use Throwable;
 
 class InsightsAnalyzer
 {
@@ -20,7 +18,7 @@ class InsightsAnalyzer
             ->using(config('loqfy.ai.provider'), config('loqfy.ai.model'))
             ->usingTemperature(0.2)
             ->withMaxTokens(900)
-            ->withClientRetry(4, fn (int $attempt, Throwable $e): int => 15_000, fn (Throwable $e): bool => $e instanceof RequestException && $e->response->status() === 429, throw: true)
+            ->withClientRetry(ProviderRetry::ATTEMPTS, ProviderRetry::delayMs(...), ProviderRetry::shouldRetry(...), throw: true)
             ->withSystemPrompt($this->prompt())
             ->withPrompt("Dados da locadora:\n".json_encode($metrics, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
             ->withSchema($this->schema())

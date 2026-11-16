@@ -3,8 +3,8 @@
 namespace App\Jobs;
 
 use App\Ai\InspectionAnalyzer;
-use App\Models\AiRun;
 use App\Models\Inspection;
+use App\Services\AiRunLog;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +21,7 @@ class AnalyzeInspection implements ShouldQueue
 
     public function __construct(public Inspection $inspection) {}
 
-    public function handle(InspectionAnalyzer $analyzer): void
+    public function handle(InspectionAnalyzer $analyzer, AiRunLog $log): void
     {
         $inspection = $this->inspection->load('rentalItem.equipment');
         $disk = Storage::disk('public');
@@ -38,19 +38,7 @@ class AnalyzeInspection implements ShouldQueue
             return;
         }
 
-        AiRun::create([
-            'feature' => 'inspection',
-            'model' => config('loqfy.ai.model'),
-            'subject_type' => $inspection->getMorphClass(),
-            'subject_id' => $inspection->id,
-            'output' => $result->extraction ?? ['raw' => $result->rawText],
-            'steps' => $result->steps,
-            'prompt_tokens' => $result->promptTokens,
-            'completion_tokens' => $result->completionTokens,
-            'latency_ms' => $result->latencyMs,
-            'success' => $result->error === null,
-            'error' => $result->error,
-        ]);
+        $log->record('inspection', $result, $inspection);
 
         $inspection->update($result->extraction === null
             ? ['status' => Inspection::FAILED, 'error' => $result->error]

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Ai\InsightsAnalyzer;
 use App\Http\Controllers\Controller;
 use App\Models\AiRun;
+use App\Services\AiRunLog;
 use App\Services\DashboardReport;
 use Prism\Prism\Exceptions\PrismException;
 
@@ -15,7 +16,7 @@ class DashboardController extends Controller
         return ['metrics' => $report->metrics(), 'analysis' => $this->lastAnalysis()];
     }
 
-    public function analyze(DashboardReport $report, InsightsAnalyzer $analyzer): array
+    public function analyze(DashboardReport $report, InsightsAnalyzer $analyzer, AiRunLog $log): array
     {
         try {
             $result = $analyzer->analyze($report->metrics());
@@ -23,17 +24,7 @@ class DashboardController extends Controller
             abort(503, 'A análise não pôde ser gerada agora. Tente de novo em um minuto.');
         }
 
-        AiRun::create([
-            'feature' => 'insights',
-            'model' => config('loqfy.ai.model'),
-            'output' => $result->extraction ?? ['raw' => $result->rawText],
-            'steps' => $result->steps,
-            'prompt_tokens' => $result->promptTokens,
-            'completion_tokens' => $result->completionTokens,
-            'latency_ms' => $result->latencyMs,
-            'success' => $result->error === null,
-            'error' => $result->error,
-        ]);
+        $log->record('insights', $result);
 
         abort_if($result->extraction === null, 503, 'A IA não devolveu uma análise legível. Tente de novo.');
 

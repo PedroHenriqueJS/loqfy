@@ -4,7 +4,6 @@ namespace App\Ai;
 
 use App\Ai\Tools\QuoteTools;
 use Carbon\CarbonImmutable;
-use Illuminate\Http\Client\RequestException;
 use Prism\Prism\Exceptions\PrismException;
 use Prism\Prism\Facades\Prism;
 use Prism\Prism\Schema\ArraySchema;
@@ -16,7 +15,6 @@ use Prism\Prism\Schema\StringSchema;
 use Prism\Prism\Structured\PendingRequest as PendingStructuredRequest;
 use Prism\Prism\Text\PendingRequest;
 use Prism\Prism\Text\Response;
-use Throwable;
 
 class QuoteAgent
 {
@@ -77,19 +75,7 @@ class QuoteAgent
             ->using(config('loqfy.ai.provider'), config('loqfy.ai.model'))
             ->usingTemperature(0)
             ->withMaxTokens(700)
-            ->withClientRetry(4, fn (int $attempt, Throwable $e): int => self::retryDelayMs($e), fn (Throwable $e): bool => self::isRateLimit($e), throw: true);
-    }
-
-    private static function isRateLimit(Throwable $e): bool
-    {
-        return $e instanceof RequestException && $e->response->status() === 429;
-    }
-
-    private static function retryDelayMs(Throwable $e): int
-    {
-        $seconds = $e instanceof RequestException ? (float) $e->response->header('retry-after') : 0;
-
-        return (int) ((max($seconds, 2) + 1) * 1000);
+            ->withClientRetry(ProviderRetry::ATTEMPTS, ProviderRetry::delayMs(...), ProviderRetry::shouldRetry(...), throw: true);
     }
 
     private function toolCalls(Response $response): array
@@ -146,6 +132,7 @@ class QuoteAgent
         - Use somente equipment_id que aparece nos resultados das consultas. Em cada consulta, o primeiro resultado é o mais parecido com o termo.
         - Se a consulta não achou nada para um termo, não inclua o item e registre um problema not_in_catalog citando o termo.
         - Se a consulta devolveu mais de um equipamento que serve para o termo (por exemplo, tamanhos diferentes) e o cliente não disse qual, use o primeiro e registre um problema ambiguous citando as opções.
+        - Se o termo do cliente é um dos outros nomes cadastrados do equipamento (aliases), inclusive gíria ou marca, o termo está resolvido: não registre ambiguous por isso.
         - Se o equipamento escolhido está com "available": false, veja as alternativas dele. Se uma delas serve ao mesmo trabalho e está disponível, use o id dela em equipment_id e ponha o id do equipamento original em substitutes_equipment_id. Se nenhuma serve, mantenha o original. Nos dois casos registre um problema unavailable.
         - Quantidade não informada é 1.
         - Se o período não estiver claro, use null nas duas datas e registre um problema missing_info.
@@ -171,6 +158,7 @@ class QuoteAgent
         - start_date é o primeiro dia de uso e end_date é o último, no formato AAAA-MM-DD.
         - "Amanhã" sem duração é um dia só, com as duas datas iguais. "Por 3 dias a partir de segunda" vai de segunda a quarta. "Fim de semana" é o próximo sábado e domingo.
         - Data sem ano é a próxima ocorrência dessa data.
+        - Uma referência vaga que não diz quais dias ("semana que vem", "mês que vem", "uns dias", "logo") não define o período: use null nas duas datas e registre um problema missing_info pedindo o primeiro e o último dia.
         RULES;
     }
 

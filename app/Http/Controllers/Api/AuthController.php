@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ class AuthController extends Controller
 {
     public const DEMO_EMAIL = 'demo@loqfy.test';
 
-    public function demo(Request $request): array
+    public function demo(Request $request): UserResource
     {
         $user = User::firstOrCreate(
             ['email' => self::DEMO_EMAIL],
@@ -22,12 +23,12 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return $this->present($user);
+        return new UserResource($user);
     }
 
-    public function me(Request $request): array
+    public function me(Request $request): UserResource
     {
-        return $this->present($request->user());
+        return new UserResource($request->user());
     }
 
     public function logout(Request $request): array
@@ -37,10 +38,5 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return ['signed_out' => true];
-    }
-
-    private function present(User $user): array
-    {
-        return ['name' => $user->name, 'email' => $user->email];
     }
 }

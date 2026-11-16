@@ -3,9 +3,9 @@
 namespace App\Jobs;
 
 use App\Ai\QuoteAgent;
-use App\Models\AiRun;
 use App\Models\Quote;
 use App\Models\RentalRequest;
+use App\Services\AiRunLog;
 use App\Services\QuoteBuilder;
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -23,7 +23,7 @@ class ProcessRentalRequest implements ShouldQueue
 
     public function __construct(public RentalRequest $rentalRequest) {}
 
-    public function handle(QuoteAgent $agent, QuoteBuilder $builder): void
+    public function handle(QuoteAgent $agent, QuoteBuilder $builder, AiRunLog $log): void
     {
         $request = $this->rentalRequest;
         $request->update(['status' => RentalRequest::PROCESSING, 'error' => null]);
@@ -37,20 +37,7 @@ class ProcessRentalRequest implements ShouldQueue
             return;
         }
 
-        AiRun::create([
-            'feature' => 'quote',
-            'model' => config('loqfy.ai.model'),
-            'subject_type' => $request->getMorphClass(),
-            'subject_id' => $request->id,
-            'output' => $result->extraction ?? ['raw' => $result->rawText],
-            'tool_calls' => $result->toolCalls,
-            'steps' => $result->steps,
-            'prompt_tokens' => $result->promptTokens,
-            'completion_tokens' => $result->completionTokens,
-            'latency_ms' => $result->latencyMs,
-            'success' => $result->error === null,
-            'error' => $result->error,
-        ]);
+        $log->record('quote', $result, $request);
 
         $extraction = $result->extraction ?? [
             'issues' => [['type' => 'missing_info', 'message' => 'A IA não devolveu uma resposta legível. Preencha o orçamento manualmente.']],

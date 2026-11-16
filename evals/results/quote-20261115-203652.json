@@ -1,0 +1,911 @@
+{
+    "suite": "quote",
+    "model": "qwen/qwen3.8-27b",
+    "ran_at": "2026-11-15T20:36:52-03:00",
+    "reference_date": "2026-11-11",
+    "summary": {
+        "cases_fully_correct": "24/24 (100%)",
+        "valid_output": "24/24 (100%)",
+        "items_correct": "24/24 (100%)",
+        "dates_correct": "24/24 (100%)",
+        "delivery_zone_correct": "24/24 (100%)",
+        "review_flag_correct": "24/24 (100%)",
+        "total_correct_when_checked": "14/14 (100%)",
+        "invented_prices": 0,
+        "average_latency_ms": 2484,
+        "average_tokens": 3108
+    },
+    "cases": [
+        {
+            "id": "simple-1",
+            "category": "simple",
+            "text": "Preciso de uma furadeira de impacto amanhã, retiro na loja",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2145,
+            "tokens": 2927,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Furadeira de impacto",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-12",
+                "end_date": "2026-11-12",
+                "zone": null,
+                "needs_review": false,
+                "total": 30,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "simple-2",
+            "category": "simple",
+            "text": "Bom dia, quero alugar 2 escadas extensíveis de 16 a 18/11. Entrega no Kobrasol. Aqui é a Renata",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2176,
+            "tokens": 3058,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Escada extensível 7m",
+                        "quantity": 2
+                    }
+                ],
+                "start_date": "2026-11-16",
+                "end_date": "2026-11-18",
+                "zone": 1,
+                "needs_review": false,
+                "total": 220,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "simple-3",
+            "category": "simple",
+            "text": "Quero uma placa vibratória por 3 dias a partir de segunda, obra na Trindade",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 3062,
+            "tokens": 3024,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Placa vibratória",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-16",
+                "end_date": "2026-11-18",
+                "zone": 2,
+                "needs_review": false,
+                "total": 390,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "multi-1",
+            "category": "multiple items",
+            "text": "Preciso de 1 serra mármore, 1 esmerilhadeira e 4 carrinhos de mão de quinta a sábado. Entrega em Coqueiros.",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 3262,
+            "tokens": 3459,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Serra mármore",
+                        "quantity": 1
+                    },
+                    {
+                        "equipment": "Esmerilhadeira 7 polegadas",
+                        "quantity": 1
+                    },
+                    {
+                        "equipment": "Carrinho de mão",
+                        "quantity": 4
+                    }
+                ],
+                "start_date": "2026-11-12",
+                "end_date": "2026-11-14",
+                "zone": 1,
+                "needs_review": false,
+                "total": 394,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "multi-2",
+            "category": "multiple items",
+            "text": "oi, 30 escoras metálicas e 1 vibrador de concreto do dia 20 ao dia 27/11, entrega no centro de Palhoça",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2460,
+            "tokens": 3289,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Escora metálica",
+                        "quantity": 30
+                    },
+                    {
+                        "equipment": "Vibrador de concreto",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-20",
+                "end_date": "2026-11-27",
+                "zone": 3,
+                "needs_review": false,
+                "total": 988,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "multi-3",
+            "category": "multiple items",
+            "text": "Gerador 5 kva e compressor de ar pra amanhã e sexta, retiro",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2878,
+            "tokens": 3152,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Gerador 5 kVA",
+                        "quantity": 1
+                    },
+                    {
+                        "equipment": "Compressor de ar 10 pés",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-12",
+                "end_date": "2026-11-13",
+                "zone": null,
+                "needs_review": false,
+                "total": 420,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "dates-1",
+            "category": "relative dates",
+            "text": "preciso de um martelo demolidor 30kg no fim de semana, entrega no Estreito",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2472,
+            "tokens": 3045,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Martelo demolidor 30kg",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-14",
+                "end_date": "2026-11-15",
+                "zone": 1,
+                "needs_review": false,
+                "total": 340,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "dates-2",
+            "category": "relative dates",
+            "text": "Tem aspirador industrial pra hoje? Passo aí pegar",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2135,
+            "tokens": 2926,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Aspirador industrial",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-11",
+                "end_date": "2026-11-11",
+                "zone": null,
+                "needs_review": false,
+                "total": 60,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "dates-3",
+            "category": "relative dates",
+            "text": "Quero a politriz de piso da próxima segunda até quarta. Entrega no Itacorubi",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2056,
+            "tokens": 3005,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Politriz de piso",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-16",
+                "end_date": "2026-11-18",
+                "zone": 2,
+                "needs_review": false,
+                "total": 330,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "slang-1",
+            "category": "synonyms and slang",
+            "text": "tem sapo pra alugar amanhã? obra em Barreiros",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2386,
+            "tokens": 3060,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Compactador de solo tipo sapo",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-12",
+                "end_date": "2026-11-12",
+                "zone": 1,
+                "needs_review": false,
+                "total": 160,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "slang-2",
+            "category": "synonyms and slang",
+            "text": "preciso de um lava jato e de uma makita sábado, retiro na loja",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2217,
+            "tokens": 3139,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Lavadora de alta pressão",
+                        "quantity": 1
+                    },
+                    {
+                        "equipment": "Serra mármore",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-14",
+                "end_date": "2026-11-14",
+                "zone": null,
+                "needs_review": false,
+                "total": 105,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "slang-3",
+            "category": "synonyms and slang",
+            "text": "quero alugar uma carriola e um helicóptero pra alisar piso, dias 17 e 18. Entrega em Campinas",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2370,
+            "tokens": 3254,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Carrinho de mão",
+                        "quantity": 1
+                    },
+                    {
+                        "equipment": "Alisadora de concreto",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-17",
+                "end_date": "2026-11-18",
+                "zone": 1,
+                "needs_review": false,
+                "total": 384,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "typo-1",
+            "category": "typos",
+            "text": "presiso de uma betonera 400 litros amanha, entrega no pantanal",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2639,
+            "tokens": 3039,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Betoneira 400L",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-12",
+                "end_date": "2026-11-12",
+                "zone": 2,
+                "needs_review": false,
+                "total": 150,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "typo-2",
+            "category": "typos",
+            "text": "bom dia qero 10 andaimes e 1 furadera pra segunda e terça, entrega em sao jose",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": true
+            },
+            "failures": [],
+            "latency_ms": 2837,
+            "tokens": 3217,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Andaime tubular 1,0 x 1,5m",
+                        "quantity": 10
+                    },
+                    {
+                        "equipment": "Furadeira de impacto",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-16",
+                "end_date": "2026-11-17",
+                "zone": 1,
+                "needs_review": false,
+                "total": 260,
+                "issues": []
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "unavailable-1",
+            "category": "unavailable",
+            "text": "Preciso do rolo compactador amanhã, obra em Palhoça",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2597,
+            "tokens": 3210,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Compactador de solo tipo sapo",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-12",
+                "end_date": "2026-11-12",
+                "zone": 3,
+                "needs_review": true,
+                "total": 190,
+                "issues": [
+                    {
+                        "type": "unavailable",
+                        "message": "O Rolo compactador 1,5t está indisponível. Substituído pelo Compactador de solo tipo sapo, que é uma alternativa disponível, mas com uso diferente (valas estreitas e solo argiloso).",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "substitution",
+                        "message": "Rolo compactador 1,5t indisponível, substituído por Compactador de solo tipo sapo.",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "unavailable-2",
+            "category": "unavailable",
+            "text": "quero uma betoneira 400L pro fim de semana, retiro na loja",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2818,
+            "tokens": 3233,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Betoneira 400L",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-14",
+                "end_date": "2026-11-15",
+                "zone": null,
+                "needs_review": true,
+                "total": 180,
+                "issues": [
+                    {
+                        "type": "unavailable",
+                        "message": "Betoneira 400L está indisponível. Nenhuma das alternativas (Vibrador de concreto, Betoneira 150L, Alisadora de concreto) serve para o mesmo trabalho de misturar concreto em volume de 400L.",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "unavailable",
+                        "message": "Betoneira 400L: 0 disponível(is) no período, pedido de 1.",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "unavailable-3",
+            "category": "unavailable",
+            "text": "preciso de 20 andaimes de 16 a 20/11, entrega nos Ingleses",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2976,
+            "tokens": 3300,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Andaime tubular 1,0 x 1,5m",
+                        "quantity": 20
+                    }
+                ],
+                "start_date": "2026-11-16",
+                "end_date": "2026-11-20",
+                "zone": 4,
+                "needs_review": true,
+                "total": 910,
+                "issues": [
+                    {
+                        "type": "unavailable",
+                        "message": "Andaime tubular 1,0 x 1,5m está indisponível. Nenhuma das alternativas (Escora metálica, Escada extensível 7m, Guincho de coluna 300kg) serve para o mesmo trabalho.",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "unavailable",
+                        "message": "Andaime tubular 1,0 x 1,5m: 10 disponível(is) no período, pedido de 20.",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "ambiguous-1",
+            "category": "ambiguous or incomplete",
+            "text": "preciso de um gerador amanhã",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2554,
+            "tokens": 3044,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Gerador 5 kVA",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-12",
+                "end_date": "2026-11-12",
+                "zone": null,
+                "needs_review": true,
+                "total": 130,
+                "issues": [
+                    {
+                        "type": "ambiguous",
+                        "message": "O termo 'gerador' pode se referir a Gerador 5 kVA ou Gerador 12 kVA. Foi selecionado o Gerador 5 kVA por ser o primeiro resultado.",
+                        "source": "ai"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "ambiguous-2",
+            "category": "ambiguous or incomplete",
+            "text": "Oi, quero alugar uma serra. Entrega no Campeche",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2040,
+            "tokens": 3120,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Serra mármore",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": null,
+                "end_date": null,
+                "zone": 4,
+                "needs_review": true,
+                "total": 110,
+                "issues": [
+                    {
+                        "type": "ambiguous",
+                        "message": "O termo 'serra' pode se referir a: Serra mármore, Serra circular ou Cortadora de piso. Qual delas você precisa?",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "missing_info",
+                        "message": "Período da locação não definido.",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "ambiguous-3",
+            "category": "ambiguous or incomplete",
+            "text": "quanto fica uma betoneira pra semana que vem?",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2315,
+            "tokens": 3078,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Betoneira 400L",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": null,
+                "end_date": null,
+                "zone": null,
+                "needs_review": true,
+                "total": 0,
+                "issues": [
+                    {
+                        "type": "ambiguous",
+                        "message": "Cliente pediu 'betoneira' sem especificar o tamanho. Opções: Betoneira 400L ou Betoneira 150L.",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "missing_info",
+                        "message": "Período da locação não definido.",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "catalog-1",
+            "category": "not in catalog",
+            "text": "vocês tem guindaste e mini escavadeira pra alugar dia 20?",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2280,
+            "tokens": 3017,
+            "actual": {
+                "items": [],
+                "start_date": "2026-11-20",
+                "end_date": "2026-11-20",
+                "zone": null,
+                "needs_review": true,
+                "total": 0,
+                "issues": [
+                    {
+                        "type": "not_in_catalog",
+                        "message": "O termo 'guindaste' não foi encontrado no catálogo.",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "not_in_catalog",
+                        "message": "O termo 'mini escavadeira' não foi encontrado no catálogo.",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "missing_info",
+                        "message": "Nenhum equipamento do catálogo no orçamento.",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "catalog-2",
+            "category": "not in catalog",
+            "text": "preciso de uma betoneira 150L e de uma retroescavadeira de 18 a 19/11, retiro",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2543,
+            "tokens": 3133,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Betoneira 150L",
+                        "quantity": 1
+                    }
+                ],
+                "start_date": "2026-11-18",
+                "end_date": "2026-11-19",
+                "zone": null,
+                "needs_review": true,
+                "total": 110,
+                "issues": [
+                    {
+                        "type": "not_in_catalog",
+                        "message": "O termo 'retroescavadeira' não foi encontrado no catálogo.",
+                        "source": "ai"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "other-1",
+            "category": "other",
+            "text": "2 furadeiras pra sexta, entrega em Blumenau",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2277,
+            "tokens": 3038,
+            "actual": {
+                "items": [
+                    {
+                        "equipment": "Furadeira de impacto",
+                        "quantity": 2
+                    }
+                ],
+                "start_date": "2026-11-13",
+                "end_date": "2026-11-13",
+                "zone": null,
+                "needs_review": true,
+                "total": 60,
+                "issues": [
+                    {
+                        "type": "missing_info",
+                        "message": "O cliente pediu entrega em Blumenau, mas a consulta de zona de entrega indicou que não é possível entregar para essa região. É necessário confirmar com o cliente se ele pode retirar na loja ou se há outra forma de logística.",
+                        "source": "ai"
+                    },
+                    {
+                        "type": "delivery_zone_unknown",
+                        "message": "Não há zona de entrega cadastrada para \"Blumenau\".",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        },
+        {
+            "id": "other-2",
+            "category": "other",
+            "text": "bom dia, vocês abrem sábado?",
+            "checks": {
+                "valid_output": true,
+                "items": true,
+                "dates": true,
+                "delivery": true,
+                "review_flag": true,
+                "total": null
+            },
+            "failures": [],
+            "latency_ms": 2115,
+            "tokens": 2822,
+            "actual": {
+                "items": [],
+                "start_date": null,
+                "end_date": null,
+                "zone": null,
+                "needs_review": true,
+                "total": 0,
+                "issues": [
+                    {
+                        "type": "missing_info",
+                        "message": "Período da locação não definido.",
+                        "source": "system"
+                    },
+                    {
+                        "type": "missing_info",
+                        "message": "Nenhum equipamento do catálogo no orçamento.",
+                        "source": "system"
+                    }
+                ]
+            },
+            "invented_price": false,
+            "passed": true
+        }
+    ]
+}

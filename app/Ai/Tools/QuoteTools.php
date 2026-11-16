@@ -86,6 +86,7 @@ class QuoteTools
             'equipment_id' => $equipment->id,
             'name' => $equipment->name,
             'description' => $equipment->description,
+            'aliases' => $equipment->aliases,
         ];
     }
 

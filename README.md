@@ -41,28 +41,30 @@ Consequências práticas:
 
 Cada recurso de IA tem uma eval: um conjunto de entradas com resposta conhecida, rodado por um comando, que diz quanto a IA acerta e onde erra.
 
-### Orçamento: 22 de 24 casos corretos
+### Orçamento: 24 de 24 casos corretos, depois de uma correção
 
-`php artisan loqfy:eval quote`, modelo `qwen/qwen3.8-27b`, execução de 11/11/2026.
+`php artisan loqfy:eval quote`, modelo `qwen/qwen3.8-27b`.
 
-| Métrica | Resultado |
-|---|---|
-| Casos 100% corretos | 22/24 (92%) |
-| Resposta em formato válido | 24/24 |
-| Equipamentos e quantidades corretos | 24/24 |
-| Datas corretas | 23/24 |
-| Zona de entrega correta | 24/24 |
-| Sinal de "precisa de revisão" correto | 23/24 |
-| Total em reais correto, quando conferido | 14/14 |
-| Preços inventados | 0 |
-| Tempo médio por pedido | 2,7 s |
+| Métrica | 11/11/2026 | 15/11/2026 |
+|---|---|---|
+| Casos 100% corretos | 22/24 (92%) | 24/24 (100%) |
+| Resposta em formato válido | 24/24 | 24/24 |
+| Equipamentos e quantidades corretos | 24/24 | 24/24 |
+| Datas corretas | 23/24 | 24/24 |
+| Zona de entrega correta | 24/24 | 24/24 |
+| Sinal de "precisa de revisão" correto | 23/24 | 24/24 |
+| Total em reais correto, quando conferido | 14/14 | 14/14 |
+| Preços inventados | 0 | 0 |
+| Tempo médio por pedido | 2,7 s | 2,5 s |
 
 Os casos cobrem pedido simples, vários itens, datas relativas ("fim de semana", "amanhã e sexta"), gíria ("sapo", "makita", "helicóptero"), erro de digitação, item indisponível, pedido ambíguo, item fora do catálogo e mensagem que não é pedido.
 
-Os dois erros:
+Os dois erros da primeira execução, e o que mudou:
 
-- **"preciso de um lava jato e de uma makita sábado, retiro na loja".** Itens, data e total certos, mas a IA marcou o pedido para revisão: avisou que "makita" é uma marca e pode não ser a serra mármore. O gabarito considerava o termo claro, como gíria de obra. É um erro por excesso de cautela, que custa um clique do atendente.
-- **"quanto fica uma betoneira pra semana que vem?".** A regra pedia deixar o período em aberto e perguntar ao cliente. A IA assumiu segunda a domingo. Este é o erro mais sério, porque produz um orçamento com datas que o cliente não disse. A marcação de revisão foi feita por outro motivo (o tamanho da betoneira), então o atendente ainda veria o pedido.
+- **"quanto fica uma betoneira pra semana que vem?".** A IA assumiu segunda a domingo, ou seja, inventou datas que o cliente não disse. Foi o erro mais sério. A instrução ganhou uma regra: referência vaga, sem dias definidos ("semana que vem", "mês que vem", "uns dias"), deixa o período em aberto e pede os dias ao cliente.
+- **"preciso de um lava jato e de uma makita sábado".** Itens, data e total certos, mas a IA marcou para revisão por achar que "makita" (uma marca) podia não ser a serra mármore. "makita" está cadastrado como outro nome da serra, mas a IA não via esse cadastro. A busca passou a devolver os outros nomes de cada equipamento, e a instrução diz que um termo cadastrado não é ambíguo.
+
+Um cuidado ao ler o 24 de 24: as duas correções foram escritas depois de ver os erros, nos mesmos 24 casos. O resultado mostra que os erros foram resolvidos, não que a IA acerta tudo. Para medir se a melhoria vale para pedidos novos, o próximo passo é um conjunto separado de casos escritos sem olhar o resultado.
 
 Os casos e os gabaritos estão em `evals/quote.json`. O resultado completo, caso a caso, está em `evals/results/quote-latest.json` e na tela "Qualidade da IA".
 
@@ -136,16 +138,21 @@ Locadoras maiores vendem para prefeituras, e um edital de locação de equipamen
 - **Frontend:** React 19, TypeScript, MUI e Vite, em `frontend/`.
 
 ```
-app/Ai/                 QuoteAgent, InspectionAnalyzer, ReceiptReader, InsightsAnalyzer, Tools/QuoteTools
-app/Services/           CatalogSearch, AvailabilityService, PricingService,
-                        DeliveryZoneResolver, QuoteBuilder, RentalService,
-                        FinanceReport, DashboardReport
+app/Ai/                 QuoteAgent, InspectionAnalyzer, ReceiptReader, InsightsAnalyzer,
+                        Tools/QuoteTools, ProviderRetry
+app/Services/           regras de negócio: CatalogSearch, AvailabilityService, PricingService,
+                        DeliveryZoneResolver, QuoteBuilder, RentalService, InspectionService,
+                        ReceiptIntake, ReceiptChecks, DuplicatePhotos, CnpjLookup,
+                        FinanceReport, DashboardReport, AiRunLog
+app/Http/Controllers/   recebem a requisição e chamam os serviços
+app/Http/Requests/      validação das entradas
+app/Http/Resources/     formato do JSON devolvido
 app/Jobs/               ProcessRentalRequest, AnalyzeInspection
 app/Console/Commands/   LoqfyEval
 evals/                  casos, gabaritos e resultados das evals
-tests/                  testes da parte determinística
+tests/                  regras de negócio e fluxos de IA com respostas simuladas
 frontend/src/pages/     Início, Orçamentos, Locações, Clientes, Catálogo e Financeiro (sistema manual)
-frontend/src/pages/ai/  Orçamento por mensagem, Vistoria por foto e Qualidade da IA
+frontend/src/pages/ai/  Orçamento por mensagem, Vistoria por foto, Comprovante por foto e Qualidade da IA
 ```
 
 Caminho de um pedido lido pela IA (o orçamento manual entra direto no passo 3, por `POST /api/quotes`):
@@ -191,7 +198,7 @@ cd frontend && npm run dev # interface em http://localhost:5173
 Testes e evals:
 
 ```bash
-php artisan test                  # 34 testes, sem chamar a IA
+php artisan test                  # 40 testes, sem chamar a IA
 php artisan loqfy:eval quote      # cerca de 9 minutos, por causa do limite de tokens
 php artisan loqfy:eval inspection
 php artisan loqfy:eval receipt
